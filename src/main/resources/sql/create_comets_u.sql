@@ -4,7 +4,7 @@ DROP TYPE IF EXISTS e_tail_type CASCADE;
 CREATE TYPE e_tail_type AS ENUM 
 	('?');
 CREATE TABLE comets (
-	object_id SERIAL references objects(id),
+	object_id SERIAL references objects(id) ON DELETE CASCADE,
 	aphelion,
 	perihelion,
 	tail_type e_tail_type,
