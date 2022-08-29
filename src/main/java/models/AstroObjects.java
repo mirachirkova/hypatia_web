@@ -41,9 +41,7 @@ public class AstroObjects implements CommonEntity<Long> {
     @Column(nullable = false, name = "discovery_date")
     private java.sql.Date discovery_date;
 
-    @Column(nullable = false, name = "ncg_id")
-    private String ncg_id;
+    @Column(nullable = false, name = "info")
+    private String info;
 
-    @Column(nullable = false, name = "messier_id")
-    private String messier_id;
 }

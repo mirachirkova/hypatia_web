@@ -9,6 +9,5 @@ CREATE TABLE objects (
 	object_class e_object_class,
 	discoverer text,
 	discovery_date date,
-	ncg_id text,
-	messier_id text
+	info text
 );

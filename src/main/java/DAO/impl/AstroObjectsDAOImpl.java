@@ -48,22 +48,11 @@ public class AstroObjectsDAOImpl extends CommonDAOImpl<AstroObjects, Long> imple
     }
 
     @Override
-    public AstroObjects getObjectByNCG(String ObjectNCGId) {
+    public List<AstroObjects> getAllObjectsByInfo(String ObjectInfo) {
         try (Session session = sessionFactory.openSession()) {
-            Query<AstroObjects> query = session.createQuery("FROM objects WHERE ncg_id = :gotNCG", AstroObjects.class)
-                    .setParameter("gotNCG", ObjectNCGId);
-
-            return query.getResultList().size() == 0 ? null : query.getResultList().get(0);
-        }
-    }
-
-    @Override
-    public AstroObjects getObjectByMessier(String ObjectMessierId) {
-        try (Session session = sessionFactory.openSession()) {
-            Query<AstroObjects> query = session.createQuery("FROM objects WHERE messier_id = :gotMessier", AstroObjects.class)
-                    .setParameter("gotMessier", ObjectMessierId);
-
-            return query.getResultList().size() == 0 ? null : query.getResultList().get(0);
+            Query<AstroObjects> query = session.createQuery("FROM objects WHERE info LIKE :gotInfo", AstroObjects.class)
+                    .setParameter("gotInfo", likeExpr(ObjectInfo));
+            return query.getResultList().size() == 0 ? null : query.getResultList();
         }
     }
 
