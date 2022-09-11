@@ -10,3 +10,5 @@ CREATE TABLE phenomenons (
 	start_time timestamp with time zone,
 	finish_time timestamp with time zone
 );
+COPY phenomenons(id, name, phenomenon_class, start_time, finish_time) 
+	FROM 'C:\Users\mir-u\Downloads\demo\demo\src\main\resources\sql\table_content\content_phenomenons.csv' WITH (FORMAT csv);

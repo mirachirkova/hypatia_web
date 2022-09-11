@@ -8,3 +8,7 @@ CREATE TABLE reactions (
 	picture_id SERIAL references pictures(id) ON DELETE CASCADE,
 	reaction e_reaction NOT NULL
 );
+
+
+COPY reactions(id, user_id, picture_id, reaction) 
+	FROM 'C:\Users\mir-u\Downloads\demo\demo\src\main\resources\sql\table_content\content_reactions.csv' WITH (FORMAT csv);
