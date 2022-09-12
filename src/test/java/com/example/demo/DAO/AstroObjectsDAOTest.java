@@ -1,5 +1,6 @@
 package com.example.demo.DAO;
 
+import com.example.demo.DAO.impl.AstroObjectsDAOImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
@@ -20,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class AstroObjectsDAOTest {
 
     @Autowired
-    private AstroObjectsDAO AstroObjectsDAO;
+    private AstroObjectsDAO AstroObjectsDAO = new AstroObjectsDAOImpl();
     @Autowired
     private SessionFactory sessionFactory;
 
     @Test
     void testSimpleManipulations() {
-        List<AstroObjects> getObjectByName = AstroObjectsDAO.getAllObjectsByName("T Возничего");
+/*        List<AstroObjects> getObjectByName = AstroObjectsDAO.getAllObjectsByName("T Возничего");
         assertEquals(1, getObjectByName.size());
 
         List<AstroObjects> getObjectsByClass = AstroObjectsDAO.getAllObjectsByClass(AstroObjects.EObjectClass.planet);
@@ -36,7 +37,11 @@ public class AstroObjectsDAOTest {
         assertEquals(3, ObjectId3.getId());
 
         AstroObjects ObjectNotExist = AstroObjectsDAO.getById(100L);
-        assertNull(ObjectNotExist);
+        assertNull(ObjectNotExist); */
+
+        List<AstroObjects> AllObjects = (List<AstroObjects>) AstroObjectsDAO.getAll();
+        System.out.println(AllObjects.size());
+        assertEquals(11, AllObjects.size());
     }
 
 

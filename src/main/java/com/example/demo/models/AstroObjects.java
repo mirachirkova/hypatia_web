@@ -14,14 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class AstroObjects implements CommonEntity<Long> {
 
-    public enum EObjectClass {
-        comet,
-        star,
-        planet,
-        satellite,
-        other
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "id")
@@ -32,7 +24,7 @@ public class AstroObjects implements CommonEntity<Long> {
     private String name;
 
     @Column(nullable = false, name = "object_class")
-    private EObjectClass object_class;
+    private String object_class;
 
     @Column(nullable = false, name = "discoverer")
     private String discoverer;

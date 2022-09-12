@@ -25,7 +25,7 @@ public class AstroObjectsDAOImpl extends CommonDAOImpl<AstroObjects, Long> imple
     }
 
     @Override
-    public List<AstroObjects> getAllObjectsByClass(AstroObjects.EObjectClass ObjectClass) {
+    public List<AstroObjects> getAllObjectsByClass(String ObjectClass) {
         try (Session session = sessionFactory.openSession()) {
             Query<AstroObjects> query = session.createQuery("FROM objects WHERE object_class = :gotClass", AstroObjects.class)
                     .setParameter("gotClass", ObjectClass);
