@@ -14,12 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Users implements CommonEntity<Long> {
 
-    public enum EGender {
-        female,
-        male,
-        unspecified,
-        other
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +33,7 @@ public class Users implements CommonEntity<Long> {
 
     @Column(nullable = false, name = "gender")
     @NonNull
-    private EGender gender;
+    private String gender;
 
     @Column(name = "password_hash")
     @NonNull

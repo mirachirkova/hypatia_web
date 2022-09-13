@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import com.example.demo.DAO.ReactionsDAO;
+import com.example.demo.DAO.PicturesDAO;
+import com.example.demo.models.Pictures;
 
 @Repository
 public class ReactionsDAOImpl extends CommonDAOImpl<Reactions, Long> implements ReactionsDAO {
@@ -14,21 +16,21 @@ public class ReactionsDAOImpl extends CommonDAOImpl<Reactions, Long> implements 
     }
 
     @Override
-    public Long getLikes(Long PictureId) {
+    public Long getLikes(Pictures PictureId) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Reactions> query = session.createQuery("FROM reactions WHERE picture_id = :gotId AND reaction = 'like'", Reactions.class)
+            Query<Reactions> query = session.createQuery("FROM Reactions WHERE picture_id = :gotId AND reaction = 'like'", Reactions.class)
                     .setParameter("gotId", PictureId);
 
-            return new Long(query.getResultList().size());
+            return (long) query.getResultList().size();
         }
     }
 
     @Override
-    public Long getDistrusts(Long PictureId) {
+    public Long getDistrusts(Pictures PictureId) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Reactions> query = session.createQuery("FROM reactions WHERE picture_id = :gotId AND reaction = 'distrust'", Reactions.class)
+            Query<Reactions> query = session.createQuery("FROM Reactions WHERE picture_id = :gotId AND reaction = 'distrust'", Reactions.class)
                     .setParameter("gotId", PictureId);
-            return new Long(query.getResultList().size());
+            return (long) query.getResultList().size();
         }
     }
 }

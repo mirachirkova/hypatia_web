@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS pictures_to_objects CASCADE;
 
 CREATE TABLE pictures_to_objects (
 	id SERIAL PRIMARY KEY,
-	object_id SERIAL references objects(id) ON DELETE CASCADE,
-	picture_id SERIAL references pictures(id) ON DELETE CASCADE
+	object_id integer NOT NULL references objects(id) ON DELETE CASCADE,
+	picture_id integer NOT NULL references pictures(id) ON DELETE CASCADE
 );
 
 COPY pictures_to_objects(id, object_id, picture_id) 

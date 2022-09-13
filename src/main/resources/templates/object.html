@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Информация об объекте</title>
+</head>
+
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <div id="objectInfo">
+        <h4 th:text="${object.getName()}"></h4>
+        <p th:if="${object.getName() != null}" th:text="'Название: ' + ${object.getName()}"></p>
+        <p th:if="${object.getObject_class() != null}" th:text="'Класс: ' + ${object.getObject_class()}"></p>
+        <p th:if="${object.getDiscoverer() != null}" th:text="'Первооткрыватель: ' + ${object.getDiscoverer()}"></p>
+        <p th:if="${object.getDiscovery_date() != null}" th:text="'Дата открытия: ' + ${#dates.formatISO(object.getDiscovery_date())}"></p>
+        <p th:if="${object.getInfo() != null}" th:text="'Дополтительная информация: ' + ${object.getInfo()} "></p>
+        <br>
+        <p th:text="'Фотографии пользователей: '"/>
+        <!--<span th: if="${PicturesToObjectsService.getAllPictures(object.getId()) == null}">нет</span>
+            <a th:each="picture, iter: ${PicturesToObjectsService.getAllPictures(object.getId())}">
+                <img th:src="@{/images/id1.jpg}" alt=""/>
+            </a>
+        </p>-->
+    </div>
+    <ul>
+        <li>
+            <th:block th:each="picture, iter: ${PicturesToObjectsService.getAllPictures(object.getId())}">
+                <a th:href="'/picture?pictureId=' + ${picture.getId()}">
+                <img th:src="@{/images/id{pic}.jpg(pic=${picture.getId()})}" alt="" style="width:304px;height:228px"/>
+                </a>
+            </th:block>
+        </li>
+    </ul>
+
+    <br>
+    <br>
+
+</div>
+
+<div th:replace="general :: site-footer"></div>
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

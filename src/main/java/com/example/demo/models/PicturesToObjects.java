@@ -19,13 +19,13 @@ public class PicturesToObjects implements CommonEntity<Long> {
     @Column(nullable = false, name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "object_id")
     @ToString.Exclude
     @NonNull
     private AstroObjects object_id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "picture_id")
     @ToString.Exclude
     @NonNull

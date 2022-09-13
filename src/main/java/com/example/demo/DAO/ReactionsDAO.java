@@ -1,10 +1,11 @@
 package com.example.demo.DAO;
 
 import com.example.demo.models.Reactions;
+import com.example.demo.models.Pictures;
 
 public interface ReactionsDAO extends CommonDAO<Reactions, Long> {
 
-    Long getLikes(Long PictureId);
-    Long getDistrusts(Long PictureId);
+    Long getLikes(Pictures PictureId);
+    Long getDistrusts(Pictures PictureId);
 
 }

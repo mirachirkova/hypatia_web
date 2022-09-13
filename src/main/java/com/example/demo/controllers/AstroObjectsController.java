@@ -35,7 +35,6 @@ public class AstroObjectsController {
     public String objectsListPage(Model model) {
         List<AstroObjects> objects = (List<AstroObjects>) astroObjectsDAO.getAll();
         model.addAttribute("objects", objects);
-        System.out.println(objects.size());
         return "objects";
     }
 

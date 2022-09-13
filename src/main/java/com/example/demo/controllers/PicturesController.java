@@ -10,6 +10,7 @@ import com.example.demo.DAO.impl.PicturesDAOImpl;
 import com.example.demo.DAO.impl.PicturesToPhenomenonsDAOImpl;
 import com.example.demo.DAO.impl.PicturesToObjectsDAOImpl;
 import com.example.demo.DAO.impl.ReactionsDAOImpl;
+import com.example.demo.DAO.impl.UsersDAOImpl;
 import com.example.demo.models.Pictures;
 
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
 public class PicturesController {
     @Autowired
     private final PicturesDAOImpl PicturesDAO = new PicturesDAOImpl();
+
+    @Autowired
+    private final UsersDAOImpl UsersDAO = new UsersDAOImpl();
 
     @Autowired
     private final PicturesToPhenomenonsDAOImpl PicturesToPhenomenonsDAO = new PicturesToPhenomenonsDAOImpl();
@@ -38,10 +42,11 @@ public class PicturesController {
             return "errorPage";
         }
 
-        model.addAttribute("object", picture);
+        model.addAttribute("picture", picture);
         model.addAttribute("PicturesToPhenomenonsService", PicturesToPhenomenonsDAO);
         model.addAttribute("ReactionsService", ReactionsDAO);
         model.addAttribute("PicturesToObjectsService", PicturesToObjectsDAO);
+        model.addAttribute("UsersService", UsersDAO);
         return "picture";
     }
 /*

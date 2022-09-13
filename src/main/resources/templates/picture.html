@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Информация о фотографии</title>
+</head>
+
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <div id="pictureInfo">
+        <h4 th:text="'Информация о фотографии:'"></h4>
+        <p th:text="'Автор: ' + ${UsersService.getNicknameByPicture(picture)}"></p>
+        <p th:text="'Модель телескопа, на которую сделано фото: ' + ${picture.getTelescope()}"></p>
+
+        <br>
+         <h4 th:text="'Фотография: '"></h4>
+        <img th:src="@{/images/id{pic}.jpg(pic=${picture.getId()})}" alt="" style="width:304px;height:228px"/>
+        <br>
+
+        <h4 th:text="'Реакции: '"></h4>
+        <p th:text="'😍: ' + ${ReactionsService.getLikes(picture)}"></p>
+        <p th:text="'🤔: ' + ${ReactionsService.getDistrusts(picture)}"></p>
+
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+
+</div>
+
+<div th:replace="general :: site-footer"></div>
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

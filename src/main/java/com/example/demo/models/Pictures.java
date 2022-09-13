@@ -14,11 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Pictures implements CommonEntity<Long> {
 
-    public enum ETelescope {
-        SKYLINE,
-        SVD1300,
-        GHM03
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +31,5 @@ public class Pictures implements CommonEntity<Long> {
     private Users author_id;
 
     @Column(nullable = false, name = "telescope")
-    private ETelescope telescope;
+    private String telescope;
 }
