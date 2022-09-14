@@ -28,7 +28,7 @@ public class UsersDAOImpl extends CommonDAOImpl<Users, Long> implements UsersDAO
         try (Session session = sessionFactory.openSession()) {
             Query<Users> query = session.createQuery("FROM Users WHERE nickname = :gotName", Users.class)
                     .setParameter("gotName", userNickname);
-            if (query.getResultList().size() != 0)
+            if (query.getResultList().size() == 0)
                 return false;
             Users userToCheck = query.getResultList().get(0);
 
@@ -41,4 +41,14 @@ public class UsersDAOImpl extends CommonDAOImpl<Users, Long> implements UsersDAO
         return PicturesDAO.getById(PictureId.getId()).getAuthor_id().getNickname();
     }
 
+    @Override
+    public Users getByNickname(String userNickname) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Users> query = session.createQuery("FROM Users WHERE nickname = :gotName", Users.class)
+                    .setParameter("gotName", userNickname);
+            if (query.getResultList().size() == 0)
+                return null;
+            return query.getResultList().get(0);
+        }
+    }
 }

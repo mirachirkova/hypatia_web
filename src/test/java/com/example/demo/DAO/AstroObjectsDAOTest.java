@@ -2,6 +2,7 @@ package com.example.demo.DAO;
 
 import com.example.demo.DAO.impl.AstroObjectsDAOImpl;
 import com.example.demo.models.Pictures;
+import com.example.demo.models.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
@@ -80,7 +81,7 @@ public class AstroObjectsDAOTest {
     @Test
     void testPictures() {
         Pictures firstPicture = PicturesDAO.getById(1L);
-        assertEquals("/images/id1.jpg", firstPicture.getLink());
+        assertEquals("/images/id_1.jpg", firstPicture.getLink());
     }
 
     @Test
@@ -89,12 +90,17 @@ public class AstroObjectsDAOTest {
         assertEquals(1, likes);
         Long dislikes = ReactionsDAO.getDistrusts(PicturesDAO.getById(5L));
         assertEquals(3, dislikes);
+
     }
 
     @Test
     void testUsers() {
         String nick = UsersDAO.getNicknameByPicture(PicturesDAO.getById(5L));
         assertEquals("milady", nick);
+        Users miladyUser= UsersDAO.getByNickname("milady");
+        assertEquals(5L, miladyUser.getId());
+        boolean checker = UsersDAO.checkHashPassword("d_artagnan", "SRdMtp");
+        assertEquals(true, checker);
     }
 
     @BeforeEach

@@ -3,14 +3,18 @@ package com.example.demo.DAO.impl;
 import com.example.demo.models.Reactions;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.example.demo.DAO.ReactionsDAO;
 import com.example.demo.DAO.PicturesDAO;
 import com.example.demo.models.Pictures;
+import com.example.demo.DAO.UsersDAO;
 
 @Repository
 public class ReactionsDAOImpl extends CommonDAOImpl<Reactions, Long> implements ReactionsDAO {
 
+    @Autowired
+    private final UsersDAO UsersDAO = new UsersDAOImpl();
     public ReactionsDAOImpl(){
         super(Reactions.class);
     }

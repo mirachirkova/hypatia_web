@@ -12,6 +12,7 @@ import com.example.demo.DAO.impl.PicturesToObjectsDAOImpl;
 import com.example.demo.DAO.impl.ReactionsDAOImpl;
 import com.example.demo.DAO.impl.UsersDAOImpl;
 import com.example.demo.models.Pictures;
+import com.example.demo.models.Reactions;
 
 import java.util.List;
 
@@ -49,40 +50,34 @@ public class PicturesController {
         model.addAttribute("UsersService", UsersDAO);
         return "picture";
     }
-/*
-    @GetMapping("/downloadPicture")
-    public String downloadPicture(@RequestParam Long pictureLinkId, @RequestParam , Model model) {
-        if (placeId == null) {
-            model.addAttribute("place", new Place());
-            return "editPlace";
-        }
 
-        Place place = placeDAO.getById(placeId);
+    @GetMapping("/addReaction")
+    public String addReactionPage(@RequestParam(name = "pictureId") Long pictureId,
+                                      Model model) {
 
-        if (place == null) {
-            model.addAttribute("error_msg", "В базе нет места с ID = " + placeId);
+        model.addAttribute("pictureId", pictureId);
+        model.addAttribute("backLink", "/addReaction?pictureId=" + pictureId + "%26");
+        model.addAttribute("UsersService", UsersDAO);
+        return "addReaction";
+    }
+
+    @PostMapping("/saveReaction")
+    public String saveReactionPage(@RequestParam(name = "pictureId") Long pictureId,
+                                       @RequestParam(name = "nickname") String nickname,
+                                       @RequestParam(name = "password") String password,
+                                       @RequestParam(name = "reaction") String reaction,
+                                        Model model) {
+        if (UsersDAO.checkHashPassword(nickname, password)) {
+            Reactions react = new Reactions(null, UsersDAO.getByNickname(nickname),
+                    PicturesDAO.getById(pictureId),
+                    reaction);
+            ReactionsDAO.save(react);
+            return "redirect:/picture?pictureId=" + pictureId;
+        } else {
+            model.addAttribute("error_msg", "Неверный никнейм или пароль.");
             return "errorPage";
         }
-
-        model.addAttribute("place", place);
-        return "editPlace";
     }
 
-    @PostMapping("/savePlace")
-    public String savePlacePage(@RequestParam(name = "placeName") String placeName,
-                                @RequestParam(name = "placeDescription") String description,
-                                Model model) {
 
-        Place place = new Place(placeName, description);
-        placeDAO.save(place);
-
-        return String.format("redirect:/place?placeId=%d", place.getId());
-    }
-
-    @PostMapping("/removePlace")
-    public String removePlacePage(@RequestParam(name = "placeId") Long placeId) {
-        placeDAO.deleteById(placeId);
-        return "redirect:/places";
-    }
-*/
 }

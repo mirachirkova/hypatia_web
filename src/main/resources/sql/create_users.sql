@@ -10,5 +10,5 @@ CREATE TABLE users (
 	password_hash integer NOT NULL
 );
 
-COPY users(id, nickname, password_hash, first_name, last_name, gender) 
+COPY users(nickname, password_hash, first_name, last_name, gender)
 	FROM 'C:\Users\mir-u\Downloads\demo\demo\src\main\resources\sql\table_content\content_users.csv' WITH (FORMAT csv);

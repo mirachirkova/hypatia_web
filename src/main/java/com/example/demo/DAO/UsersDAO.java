@@ -8,5 +8,6 @@ public interface UsersDAO extends CommonDAO<Users, Long> {
     //Users getSingleUserByNickname(String userNickname);
     boolean checkHashPassword(String userNickname, String password);
     String getNicknameByPicture(Pictures PictureId);
+    Users getByNickname(String userNickname);
 
 }

@@ -33,4 +33,5 @@ public class Reactions implements CommonEntity<Long> {
 
     @Column(nullable = false, name = "reaction")
     private String reaction;
+
 }
