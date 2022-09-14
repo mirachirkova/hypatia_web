@@ -7,5 +7,5 @@ CREATE TABLE pictures (
 	author_id SERIAL references users(id) ON DELETE CASCADE,
 	telescope text
 );
-COPY pictures(id, link, author_id, telescope) 
+COPY pictures(link, author_id, telescope)
 	FROM 'C:\Users\mir-u\Downloads\demo\demo\src\main\resources\sql\table_content\content_pictures.csv' WITH (FORMAT csv);

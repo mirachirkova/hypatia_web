@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.DAO.impl.PicturesDAOImpl;
 import com.example.demo.DAO.impl.PicturesToPhenomenonsDAOImpl;
 import com.example.demo.DAO.impl.PicturesToObjectsDAOImpl;
@@ -48,6 +49,7 @@ public class PicturesController {
         model.addAttribute("ReactionsService", ReactionsDAO);
         model.addAttribute("PicturesToObjectsService", PicturesToObjectsDAO);
         model.addAttribute("UsersService", UsersDAO);
+        model.addAttribute("PicturesService", PicturesDAO);
         return "picture";
     }
 
@@ -78,6 +80,8 @@ public class PicturesController {
             return "errorPage";
         }
     }
+
+
 
 
 }

@@ -22,9 +22,11 @@
         <h4 th:text="'Информация о фотографии:'"></h4>
         <p th:text="'Автор: ' + ${UsersService.getNicknameByPicture(picture)}"></p>
         <p th:text="'Модель телескопа, на которую сделано фото: ' + ${picture.getTelescope()}"></p>
+        <br>
 
          <h4 th:text="'Фотография: '"></h4>
-        <img th:src="@{/images/id{pic}.jpg(pic=${picture.getId()})}" alt="" style="width:304px;height:228px"/>
+        <img th:src="@{{pic}(pic=${PicturesService.getLinkById(picture.getId())})}" alt="" style="width:304px;height:228px"/>
+        <br>
 
         <h4 th:text="'Реакции: '"></h4>
         <p th:text="'😍: ' + ${ReactionsService.getLikes(picture)}"></p>

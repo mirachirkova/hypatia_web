@@ -37,12 +37,23 @@
         <li>
             <th:block th:each="picture, iter: ${PicturesToObjectsService.getAllPictures(object.getId())}">
                 <a th:href="'/picture?pictureId=' + ${picture.getId()}">
-                <img th:src="@{/images/id{pic}.jpg(pic=${picture.getId()})}" alt="" style="width:304px;height:228px"/>
+                <img th:src="@{{pic}(pic=${PicturesService.getLinkById(picture.getId())})}" alt="" style="width:304px;height:228px"/>
                 </a>
             </th:block>
         </li>
     </ul>
 
+    <br>
+    <br>
+
+    <br>
+
+    <form method="get" action="/addPicture">
+        <input id="submitButtonAdd" type="submit" value="Добавить свою фотографию" class="btn btn-primary">
+        <input type="hidden" id="objectIdAdd" name="objectId" required th:value="${object.getId()}">
+    </form>
+    <br>
+    <br>
     <br>
     <br>
 
