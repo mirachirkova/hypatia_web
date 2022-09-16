@@ -40,7 +40,7 @@ public class PicturesController {
         Pictures picture = PicturesDAO.getById(pictureId);
 
         if (picture == null) {
-            model.addAttribute("error_msg", "В базе нет объекта с ID = " + pictureId);
+            model.addAttribute("error_msg", "В базе нет фотографии с ID = " + pictureId);
             return "errorPage";
         }
 

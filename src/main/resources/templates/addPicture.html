@@ -17,7 +17,7 @@
 <div th:replace="general :: page-header"> </div>
 
 <div class="indent">
-    <form method="post" action="/savePicture">
+    <form enctype="multipart/form-data" method="post" action="/savePicture">
 
         <input type="hidden" name="objectId" th:value="${objectId}">
 
@@ -28,8 +28,8 @@
         <label>Ваш пароль:</label>
         <input type="text" id="password" name="password" required><br><br>
 
-        <label>ID фотографии (смортите на экране телескопа):</label>
-        <input type="text" id="pic_id" name="pic_id" required><br><br>
+        <!-- <label>ID фотографии (смортите на экране телескопа):</label>
+        <input type="text" id="pic_id" name="pic_id" required><br><br> -->
 
         <label>Телескоп:</label>
         <!--<input type="text" id="reaction" name="reaction" required><br><br>-->
@@ -38,6 +38,9 @@
         <input type="radio" id="telescope2" name="telescope" value="SVD1300" required/>SVD1300
         <input type="radio" id="telescope3" name="telescope" value="SKYLINE" required/>SKYLINE<br/>
         <br><br>
+
+        <label>Фотография:</label>
+        <input type="file" name="imageFile">
 
         <input id="submitButton" type="submit" value="Сохранить" class="btn btn-primary">
     </form>

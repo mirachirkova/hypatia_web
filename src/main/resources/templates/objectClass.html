@@ -16,25 +16,22 @@
 <body>
 <div th:replace="general :: page-header"> </div>
 
+<br>
+<h4 th:text="'Объекты класса ' + ${objectClassName} + ':'"></h4>
+
 <div class="indent">
 
     <table class="table table-bordered table-warning">
         <thead class="thead-dark">
         <tr>
             <th scope="col"> Название</th>
-            <th scope="col"> Класс</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="object : ${objects}">
+        <tr th:each="object : ${objectClass}">
             <td>
                 <a th:href="'/object?objectId=' + ${object.getId()}">
                     <span th:text="${object.getName()}"> </span>
-                </a>
-            </td>
-            <td>
-                <a th:href="'/objectClass?objectClass=' + ${object.getObject_class()}">
-                    <span th:text="${object.getObject_class()}"> </span>
                 </a>
             </td>
         </tr>

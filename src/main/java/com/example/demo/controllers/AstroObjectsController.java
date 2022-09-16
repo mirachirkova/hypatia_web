@@ -9,11 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.DAO.AstroObjectsDAO;
 import com.example.demo.models.AstroObjects;
 import com.example.demo.DAO.impl.UsersDAOImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
 
 @Controller
 public class AstroObjectsController {
@@ -58,6 +64,16 @@ public class AstroObjectsController {
         return "object";
     }
 
+    @GetMapping("/objectClass")
+    public String objectClassListPage(@RequestParam(name = "objectClass") String objectClass,
+                                      Model model) {
+        List<AstroObjects> objects =
+                (List<AstroObjects>) astroObjectsDAO.getAllObjectsByClass(objectClass);
+        model.addAttribute("objectClass", objects);
+        model.addAttribute("objectClassName", objectClass);
+        return "objectClass";
+    }
+
     @GetMapping("/addPicture")
     public String addPicturePage(@RequestParam(name = "objectId") Long objectId,
                                  Model model) {
@@ -73,11 +89,26 @@ public class AstroObjectsController {
     public String savePicturePage( @RequestParam(name = "objectId") Long objectId,
                                    @RequestParam(name = "nickname") String nickname,
                                    @RequestParam(name = "password") String password,
-                                   @RequestParam(name = "pic_id") Long pic_id,
+                                   @RequestParam(name = "imageFile") MultipartFile  imageFile,
                                    @RequestParam(name = "telescope") String telescope,
-                                   Model model) {
+                                   Model model, HttpServletRequest request) throws IOException {
         if (UsersDAO.checkHashPassword(nickname, password)) {
-            Pictures new_pic = new Pictures(pic_id, "/images/id" + pic_id + ".jpg",
+            String filePath =  request.getServletContext().getRealPath("/images/");
+            if(! new File(filePath).exists())
+            {
+                new File(filePath).mkdir();
+            }
+            filePath = filePath + imageFile.getOriginalFilename();
+            String eternal_storage_path = "C:\\Users\\mir-u\\Downloads\\demo\\demo\\src\\main\\resources\\static\\images\\"
+                    + imageFile.getOriginalFilename();
+            File eternalFile = new File(eternal_storage_path);
+            try (OutputStream os = new FileOutputStream(eternalFile)) {
+                os.write(imageFile.getBytes());
+            }
+            imageFile.transferTo(new File(filePath));
+
+            Pictures new_pic = new Pictures(null, "/images/" +
+                    imageFile.getOriginalFilename(),
                     UsersDAO.getByNickname(nickname), telescope);
             PicturesDAO.save(new_pic);
             PicturesToObjects new_pic_ob = new PicturesToObjects(astroObjectsDAO.getById(objectId),
@@ -90,3 +121,4 @@ public class AstroObjectsController {
         }
     }
 }
+
