@@ -17,7 +17,12 @@
 <div th:replace="general :: page-header"> </div>
 
 <div class="indent">
-
+    <form th:action="@{/objects}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Name, Discoverer, Class or Info" size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+        <button type="submit" class="btn btn-info" >Reset</button>
+    </form>
+    <br>
     <table class="table table-bordered table-warning">
         <thead class="thead-dark">
         <tr>

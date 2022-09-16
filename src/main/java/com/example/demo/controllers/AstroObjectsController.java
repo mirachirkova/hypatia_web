@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+
 import com.example.demo.DAO.impl.*;
 import com.example.demo.models.Pictures;
 import com.example.demo.models.PicturesToObjects;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Objects;
 
 @Controller
 public class AstroObjectsController {
@@ -41,9 +44,43 @@ public class AstroObjectsController {
 
 
     @GetMapping("/objects")
-    public String objectsListPage(Model model) {
-        List<AstroObjects> objects = (List<AstroObjects>) astroObjectsDAO.getAll();
-        model.addAttribute("objects", objects);
+    public String objectsListPage(Model model, String keyword) {
+        if (keyword != null) {
+            List<AstroObjects> objects =
+                    new ArrayList<AstroObjects> ();
+            if (astroObjectsDAO.getAllObjectsByName(keyword) != null) {
+                objects.addAll(astroObjectsDAO.getAllObjectsByName(keyword));
+            }
+            if (astroObjectsDAO.getAllObjectsByDiscoverer(keyword) != null) {
+                objects.addAll((ArrayList<AstroObjects>) astroObjectsDAO.getAllObjectsByDiscoverer(keyword));
+            }
+            if (astroObjectsDAO.getAllObjectsByInfo(keyword) != null) {
+                objects.addAll((ArrayList<AstroObjects>) astroObjectsDAO.getAllObjectsByInfo(keyword));
+            }
+            if (astroObjectsDAO.getAllObjectsByClass(keyword) != null) {
+                objects.addAll((ArrayList<AstroObjects>) astroObjectsDAO.getAllObjectsByClass(keyword));
+            }
+
+            List<AstroObjects> uniqueObjects = new ArrayList<AstroObjects>();
+            if (objects != null) {
+                for (AstroObjects i : objects) {
+                    boolean to_add = true;
+                    for (AstroObjects j : uniqueObjects) {
+                        if (j != null && i.getId() == j.getId()) {
+                            to_add = false;
+                        }
+                    }
+                    if (to_add) {
+                        uniqueObjects.add(i);
+                    }
+                }
+            }
+
+            model.addAttribute("objects", uniqueObjects);
+        } else {
+            List<AstroObjects> objects = (List<AstroObjects>) astroObjectsDAO.getAll();
+            model.addAttribute("objects", objects);
+        }
         return "objects";
     }
 
