@@ -20,8 +20,18 @@
 <div class="indent">
     <div id="pictureInfo">
         <h4 th:text="'Информация о фотографии:'"></h4>
-        <p th:text="'Автор: ' + ${UsersService.getNicknameByPicture(picture)}"></p>
+        <p>
+            <span th:text="'Автор: '"> </span>
+            <a th:href="'/user?userId=' + ${picture.getAuthor_id().getId()}">
+                <span th:text="${UsersService.getNicknameByPicture(picture)}"> </span>
+            </a>
+        </p>
         <p th:text="'Модель телескопа, на которую сделано фото: ' + ${picture.getTelescope()}"></p>
+        <p> Объекты на фото:&nbsp <span th:if="${PicturesToObjectsService.getAllObjects(picture.getId()).isEmpty()}">нет</span>
+            <a th:each="object, iter: ${PicturesToObjectsService.getAllObjects(picture.getId())}" th:href="'/object?objectId=' + ${object.getId()}">
+                <span th:text="${AstroObjectsService.getNameById(object.getId())} + ${!iter.last ? ',' : ''}"></span>
+            </a>
+        </p>
         <br>
 
          <h4 th:text="'Фотография: '"></h4>

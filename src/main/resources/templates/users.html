@@ -19,18 +19,18 @@
 
 
 <div class="indent">
-    <h4 th:text="'Объекты класса ' + ${objectClassName} + ':'"></h4>
+    <h4 th:text="'Участники клуба:'"></h4>
     <table class="table table-bordered table-warning">
         <thead class="thead-dark">
         <tr>
-            <th scope="col"> Название</th>
+            <th scope="col"> Никнейм</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="object : ${objectClass}">
+        <tr th:each="user : ${users}">
             <td>
-                <a th:href="'/object?objectId=' + ${object.getId()}">
-                    <span th:text="${object.getName()}"> </span>
+                <a th:href="'/user?userId=' + ${user.getId()}">
+                    <span th:text="${user.getNickname()}"> </span>
                 </a>
             </td>
         </tr>

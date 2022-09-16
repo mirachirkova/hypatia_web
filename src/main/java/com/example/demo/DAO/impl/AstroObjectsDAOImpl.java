@@ -1,6 +1,7 @@
 package com.example.demo.DAO.impl;
 
 import com.example.demo.models.AstroObjects;
+import com.example.demo.models.Pictures;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,17 @@ public class AstroObjectsDAOImpl extends CommonDAOImpl<AstroObjects, Long> imple
             Query<AstroObjects> query = session.createQuery("FROM AstroObjects WHERE info LIKE :gotInfo", AstroObjects.class)
                     .setParameter("gotInfo", likeExpr(ObjectInfo));
             return query.getResultList().size() == 0 ? null : query.getResultList();
+        }
+    }
+
+    @Override
+    public String getNameById(Long ObjectId) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<AstroObjects> query = session.createQuery("FROM AstroObjects WHERE id = :gotName", AstroObjects.class)
+                    .setParameter("gotName", ObjectId);
+            if (query.getResultList().size() == 0)
+                return null;
+            return query.getResultList().get(0).getName();
         }
     }
 

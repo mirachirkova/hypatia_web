@@ -1,5 +1,6 @@
 package com.example.demo.DAO.impl;
 
+import com.example.demo.models.PicturesToObjects;
 import com.example.demo.models.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -9,6 +10,10 @@ import com.example.demo.DAO.PicturesToObjectsDAO;
 import com.example.demo.models.Pictures;
 import org.springframework.stereotype.Repository;
 import com.example.demo.DAO.PicturesDAO;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 @Repository
@@ -30,5 +35,15 @@ public class PicturesDAOImpl extends CommonDAOImpl<Pictures, Long> implements Pi
         }
     }
 
+    @Override
+    public List<Pictures> getAllLinksByUserId(Long UserId) {
+        List<Pictures> ret = new ArrayList<>();
+        for (Pictures pictures : getAll()) {
+            if (Objects.equals(pictures.getAuthor_id().getId(), UserId)) {
+                ret.add(pictures);
+            }
+        }
+        return ret;
+    }
 
 }

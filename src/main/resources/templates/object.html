@@ -27,11 +27,6 @@
         <p th:if="${object.getInfo() != null}" th:text="'Дополтительная информация: ' + ${object.getInfo()} "></p>
         <br>
         <p th:text="'Фотографии пользователей: '"/>
-        <!--<span th: if="${PicturesToObjectsService.getAllPictures(object.getId()) == null}">нет</span>
-            <a th:each="picture, iter: ${PicturesToObjectsService.getAllPictures(object.getId())}">
-                <img th:src="@{/images/id1.jpg}" alt=""/>
-            </a>
-        </p>-->
     </div>
     <ul>
         <li>

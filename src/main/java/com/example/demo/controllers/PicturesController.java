@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.AstroObjects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import com.example.demo.DAO.impl.PicturesToPhenomenonsDAOImpl;
 import com.example.demo.DAO.impl.PicturesToObjectsDAOImpl;
 import com.example.demo.DAO.impl.ReactionsDAOImpl;
 import com.example.demo.DAO.impl.UsersDAOImpl;
+import com.example.demo.DAO.impl.AstroObjectsDAOImpl;
 import com.example.demo.models.Pictures;
 import com.example.demo.models.Reactions;
 
@@ -34,6 +36,9 @@ public class PicturesController {
     @Autowired
     private final ReactionsDAOImpl ReactionsDAO = new ReactionsDAOImpl();
 
+    @Autowired
+    private final AstroObjectsDAOImpl AstroObjectsDAO = new AstroObjectsDAOImpl();
+
 
     @GetMapping("/picture")
     public String picturesPage(@RequestParam(name = "pictureId") Long pictureId, Model model) {
@@ -49,6 +54,7 @@ public class PicturesController {
         model.addAttribute("ReactionsService", ReactionsDAO);
         model.addAttribute("PicturesToObjectsService", PicturesToObjectsDAO);
         model.addAttribute("UsersService", UsersDAO);
+        model.addAttribute("AstroObjectsService", AstroObjectsDAO);
         model.addAttribute("PicturesService", PicturesDAO);
         return "picture";
     }

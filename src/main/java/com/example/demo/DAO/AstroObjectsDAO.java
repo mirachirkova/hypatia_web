@@ -10,5 +10,6 @@ public interface AstroObjectsDAO extends CommonDAO<AstroObjects, Long> {
     List<AstroObjects> getAllObjectsByClass(String ObjectClass);
     List<AstroObjects> getAllObjectsByDiscoverer(String DiscovererName);
     List<AstroObjects> getAllObjectsByInfo(String ObjectInfo);
+    String getNameById(Long ObjectId);
 
 }

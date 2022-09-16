@@ -45,13 +45,13 @@ public class PicturesToObjectsDAOImpl extends CommonDAOImpl<PicturesToObjects, L
     }
 
     @Override
-    public List<PicturesToObjects> getAllObjects(Long PictureId) {
-        try (Session session = sessionFactory.openSession()) {
-            Query<PicturesToObjects> query = session.createQuery(
-                    "FROM PicturesToObjects WHERE picture_id = :gotId",
-                            PicturesToObjects.class)
-                    .setParameter("gotId", PictureId);
-            return query.getResultList();
+    public List<AstroObjects> getAllObjects(Long PictureId) {
+        List<AstroObjects> ret = new ArrayList<>();
+        for (PicturesToObjects picturesToObjects : getAll()) {
+            if (Objects.equals(picturesToObjects.getPicture_id().getId(), PictureId)) {
+                ret.add(picturesToObjects.getObject_id());
+            }
         }
+        return ret;
     }
 }
