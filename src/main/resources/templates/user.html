@@ -18,7 +18,7 @@
 <div th:replace="general :: page-header"> </div>
 
 <div class="indent">
-    <div id="pictureInfo">
+    <div id="userInfo">
         <h4 th:text="'Информация о пользователе ' + ${user.getNickname()} + ':'"></h4>
         <br>
         <p th:text="'Имя: ' + ${user.getFirst_name()}"></p>
@@ -27,7 +27,7 @@
         <p th:if="${user.getGender() != 'unspecified'}" th:text="'Местоимения: ' + ${user.getGender()}"></p>
         <p> Фотографии пользователя:&nbsp <span th:if="${PicturesService.getAllLinksByUserId(user.getId()).isEmpty()}">нет</span></p>
         <ul>
-            <li>
+            <li id="userPictures">
                 <th:block th:each="picture, iter: ${PicturesService.getAllLinksByUserId(user.getId())}">
                     <a th:href="'/picture?pictureId=' + ${picture.getId()}">
                         <img th:src="@{{pic}(pic=${PicturesService.getLinkById(picture.getId())})}" alt="" style="width:304px;height:228px"/>

@@ -18,12 +18,12 @@
 
 <div class="indent">
     <form th:action="@{/objects}" method="get">
-        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Name, Discoverer, Class or Info" size="50" >
-        <button type="submit" class="btn btn-info" >Search</button>
-        <button type="submit" class="btn btn-info" >Reset</button>
+        <input id="searchText" type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Name, Discoverer, Class or Info" size="50" >
+        <button id="searchSubmitButton" type="submit" class="btn btn-info" >Search</button>
+        <button id="resetSubmitButton" type="submit" class="btn btn-info" >Reset</button>
     </form>
     <br>
-    <table class="table table-bordered table-warning">
+    <table id="objectsTable" class="table table-bordered table-warning">
         <thead class="thead-dark">
         <tr>
             <th scope="col"> Название</th>
@@ -38,7 +38,7 @@
                 </a>
             </td>
             <td>
-                <a th:href="'/objectClass?objectClass=' + ${object.getObject_class()}">
+                <a id="objectClassLink" th:href="'/objectClass?objectClass=' + ${object.getObject_class()}">
                     <span th:text="${object.getObject_class()}"> </span>
                 </a>
             </td>

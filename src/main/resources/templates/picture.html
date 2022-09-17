@@ -22,7 +22,7 @@
         <h4 th:text="'Информация о фотографии:'"></h4>
         <p>
             <span th:text="'Автор: '"> </span>
-            <a th:href="'/user?userId=' + ${picture.getAuthor_id().getId()}">
+            <a id="userLink" th:href="'/user?userId=' + ${picture.getAuthor_id().getId()}">
                 <span th:text="${UsersService.getNicknameByPicture(picture)}"> </span>
             </a>
         </p>

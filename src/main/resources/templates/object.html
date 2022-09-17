@@ -29,7 +29,7 @@
         <p th:text="'Фотографии пользователей: '"/>
     </div>
     <ul>
-        <li>
+        <li id="objectPictures">
             <th:block th:each="picture, iter: ${PicturesToObjectsService.getAllPictures(object.getId())}">
                 <a th:href="'/picture?pictureId=' + ${picture.getId()}">
                 <img th:src="@{{pic}(pic=${PicturesService.getLinkById(picture.getId())})}" alt="" style="width:304px;height:228px"/>
