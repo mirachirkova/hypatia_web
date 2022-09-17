@@ -6,7 +6,7 @@ CREATE TABLE objects (
                          name text NOT NULL,
                          object_class text,
                          discoverer text,
-                         discovery_date date,
+                         discovery_date text,
                          info text
 );
 COPY objects(id, name, object_class, discoverer, discovery_date, info)

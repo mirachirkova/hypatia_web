@@ -30,7 +30,7 @@ public class AstroObjects implements CommonEntity<Long> {
     private String discoverer;
 
     @Column(nullable = false, name = "discovery_date")
-    private java.sql.Date discovery_date;
+    private String discovery_date;
 
     @Column(nullable = false, name = "info")
     private String info;

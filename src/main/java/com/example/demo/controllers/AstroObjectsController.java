@@ -149,7 +149,7 @@ public class AstroObjectsController {
             PicturesToObjectsDAO.save(new_pic_ob);
             return "redirect:/object?objectId=" + objectId;
         } else {
-            model.addAttribute("error_msg", "Неверный никнейм или пароль.");
+            model.addAttribute("error_msg", "Неверный никнейм или пароль.\n Если у Вас ещё нет телескопа Hypatia, но вы хотите стать частью нашего сообщества, купить оборудование и получить аккаунт в подарок можно через Telegram.");
             return "errorPage";
         }
     }

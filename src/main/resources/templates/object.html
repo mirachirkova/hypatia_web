@@ -23,7 +23,7 @@
         <p th:if="${object.getName() != null}" th:text="'Название: ' + ${object.getName()}"></p>
         <p th:if="${object.getObject_class() != null}" th:text="'Класс: ' + ${object.getObject_class()}"></p>
         <p th:if="${object.getDiscoverer() != null}" th:text="'Первооткрыватель: ' + ${object.getDiscoverer()}"></p>
-        <p th:if="${object.getDiscovery_date() != null}" th:text="'Дата открытия: ' + ${#dates.formatISO(object.getDiscovery_date())}"></p>
+        <p th:if="${object.getDiscovery_date() != null}" th:text="'Дата открытия: ' + ${object.getDiscovery_date()}"></p>
         <p th:if="${object.getInfo() != null}" th:text="'Дополтительная информация: ' + ${object.getInfo()} "></p>
         <br>
         <p th:text="'Фотографии пользователей: '"/>
