@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestPropertySource(locations="classpath:application.properties")
-public class AstroObjectsDAOTest {
+public class PicturesToObjectsDAOTest {
 
     @Autowired
     private AstroObjectsDAO AstroObjectsDAO = new AstroObjectsDAOImpl();
@@ -43,33 +43,21 @@ public class AstroObjectsDAOTest {
 
 
     @Test
-    void testSimpleManipulations() {
-        List<AstroObjects> getObjectByName = AstroObjectsDAO.getAllObjectsByName("T Возничего");
-        if (getObjectByName == null) {
-            assertEquals(1, 0);
+    void testPictureToObjects() {
+        List<Pictures> allMarsPictures = PicturesToObjectsDAO.getAllPictures(7L);
+        if (allMarsPictures == null) {
+            assertEquals(3, 0);
         }
-        assertEquals(1, getObjectByName.size());
+        assertEquals(3, allMarsPictures.size());
 
-        List<AstroObjects> getObjectsByClass = AstroObjectsDAO.getAllObjectsByClass("планета");
-        assertEquals(3, getObjectsByClass.size());
 
-        AstroObjects ObjectId3 = AstroObjectsDAO.getById(3L);
-        assertEquals(3, ObjectId3.getId());
+        List<String> picturesLinks = PicturesToObjectsDAO.getAllPicturesLinks(7L);
+        assertEquals(3, picturesLinks.size());
 
-        AstroObjects ObjectNotExist = AstroObjectsDAO.getById(100L);
-        assertNull(ObjectNotExist);
-
-        List<AstroObjects> AllObjects = (List<AstroObjects>) AstroObjectsDAO.getAll();
-        assertEquals(11, AllObjects.size());
-
-        List<AstroObjects> getObjectsByDiscoverer = AstroObjectsDAO.getAllObjectsByDiscoverer("Томас Дэвид Андерсон");
-        assertEquals(2, getObjectsByDiscoverer.size());
-
-        List<AstroObjects> getObjectsByInfo = AstroObjectsDAO.getAllObjectsByInfo("Самый близкий к Солнцу спутник");
-        assertEquals(1, getObjectsByInfo.size());
-        String nameInfo = AstroObjectsDAO.getNameById(getObjectsByInfo.get(0).getId());
-        assertEquals("Луна", nameInfo);
+        List<AstroObjects> allPictureObjects = PicturesToObjectsDAO.getAllObjects(1L);
+        assertEquals(1, allPictureObjects.size());
     }
+
 
     @BeforeEach
     void beforeEach() {

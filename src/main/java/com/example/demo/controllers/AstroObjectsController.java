@@ -33,9 +33,6 @@ public class AstroObjectsController {
     private final UsersDAOImpl UsersDAO = new UsersDAOImpl();
 
     @Autowired
-    private final PhenomenonsToObjectsDAOImpl PhenomenonsToObjectsDAO = new PhenomenonsToObjectsDAOImpl();
-
-    @Autowired
     private final PicturesToObjectsDAOImpl PicturesToObjectsDAO = new PicturesToObjectsDAOImpl();
 
     @Autowired
@@ -95,7 +92,6 @@ public class AstroObjectsController {
 
         model.addAttribute("object", object);
         model.addAttribute("AstroObjectsService", astroObjectsDAO);
-        model.addAttribute("PhenomenonsToObjectsService", PhenomenonsToObjectsDAO);
         model.addAttribute("PicturesToObjectsService", PicturesToObjectsDAO);
         model.addAttribute("PicturesService", PicturesDAO);
         return "object";

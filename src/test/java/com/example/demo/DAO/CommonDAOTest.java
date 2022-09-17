@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestPropertySource(locations="classpath:application.properties")
-public class AstroObjectsDAOTest {
+public class CommonDAOTest {
 
     @Autowired
     private AstroObjectsDAO AstroObjectsDAO = new AstroObjectsDAOImpl();
@@ -44,31 +44,19 @@ public class AstroObjectsDAOTest {
 
     @Test
     void testSimpleManipulations() {
-        List<AstroObjects> getObjectByName = AstroObjectsDAO.getAllObjectsByName("T Возничего");
-        if (getObjectByName == null) {
-            assertEquals(1, 0);
-        }
-        assertEquals(1, getObjectByName.size());
+        Users new_user = new Users(null, "cardinal", "Armand Jean", "du Plessis", "он/его", 100);
+        UsersDAO.save(new_user);
+        assertEquals("cardinal", UsersDAO.getById(6L).getNickname());
+        UsersDAO.deleteById(6L);
+        Users del_user = UsersDAO.getById(6L);
+        assertNull(del_user);
 
-        List<AstroObjects> getObjectsByClass = AstroObjectsDAO.getAllObjectsByClass("планета");
-        assertEquals(3, getObjectsByClass.size());
-
-        AstroObjects ObjectId3 = AstroObjectsDAO.getById(3L);
-        assertEquals(3, ObjectId3.getId());
-
-        AstroObjects ObjectNotExist = AstroObjectsDAO.getById(100L);
-        assertNull(ObjectNotExist);
-
-        List<AstroObjects> AllObjects = (List<AstroObjects>) AstroObjectsDAO.getAll();
-        assertEquals(11, AllObjects.size());
-
-        List<AstroObjects> getObjectsByDiscoverer = AstroObjectsDAO.getAllObjectsByDiscoverer("Томас Дэвид Андерсон");
-        assertEquals(2, getObjectsByDiscoverer.size());
-
-        List<AstroObjects> getObjectsByInfo = AstroObjectsDAO.getAllObjectsByInfo("Самый близкий к Солнцу спутник");
-        assertEquals(1, getObjectsByInfo.size());
-        String nameInfo = AstroObjectsDAO.getNameById(getObjectsByInfo.get(0).getId());
-        assertEquals("Луна", nameInfo);
+        Users new_user_n = new Users(7L, "cardinal", "Armand Jean", "du Plessis", "он/его", 100);
+        UsersDAO.save(new_user_n);
+        assertEquals("cardinal", UsersDAO.getById(7L).getNickname());
+        UsersDAO.deleteById(7L);
+        Users del_user_n = UsersDAO.getById(7L);
+        assertNull(del_user_n);
     }
 
     @BeforeEach

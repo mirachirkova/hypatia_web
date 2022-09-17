@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestPropertySource(locations="classpath:application.properties")
-public class AstroObjectsDAOTest {
+public class PicturesDAOTest {
 
     @Autowired
     private AstroObjectsDAO AstroObjectsDAO = new AstroObjectsDAOImpl();
@@ -43,33 +43,20 @@ public class AstroObjectsDAOTest {
 
 
     @Test
-    void testSimpleManipulations() {
-        List<AstroObjects> getObjectByName = AstroObjectsDAO.getAllObjectsByName("T Возничего");
-        if (getObjectByName == null) {
-            assertEquals(1, 0);
-        }
-        assertEquals(1, getObjectByName.size());
+    void testPictures() {
+        Pictures firstPicture = PicturesDAO.getById(1L);
+        assertEquals("/images/id1.jpg", firstPicture.getLink());
 
-        List<AstroObjects> getObjectsByClass = AstroObjectsDAO.getAllObjectsByClass("планета");
-        assertEquals(3, getObjectsByClass.size());
+        String linkById = PicturesDAO.getLinkById(1L);
+        assertEquals("/images/id1.jpg", linkById);
 
-        AstroObjects ObjectId3 = AstroObjectsDAO.getById(3L);
-        assertEquals(3, ObjectId3.getId());
+        String linkById_n = PicturesDAO.getLinkById(100L);
+        assertEquals(null, linkById_n);
 
-        AstroObjects ObjectNotExist = AstroObjectsDAO.getById(100L);
-        assertNull(ObjectNotExist);
-
-        List<AstroObjects> AllObjects = (List<AstroObjects>) AstroObjectsDAO.getAll();
-        assertEquals(11, AllObjects.size());
-
-        List<AstroObjects> getObjectsByDiscoverer = AstroObjectsDAO.getAllObjectsByDiscoverer("Томас Дэвид Андерсон");
-        assertEquals(2, getObjectsByDiscoverer.size());
-
-        List<AstroObjects> getObjectsByInfo = AstroObjectsDAO.getAllObjectsByInfo("Самый близкий к Солнцу спутник");
-        assertEquals(1, getObjectsByInfo.size());
-        String nameInfo = AstroObjectsDAO.getNameById(getObjectsByInfo.get(0).getId());
-        assertEquals("Луна", nameInfo);
+        List<Pictures> allLinksByUser = PicturesDAO.getAllLinksByUserId(1L);
+        assertEquals(1, allLinksByUser.size());
     }
+
 
     @BeforeEach
     void beforeEach() {

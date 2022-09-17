@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.DAO.impl.PicturesDAOImpl;
-import com.example.demo.DAO.impl.PicturesToPhenomenonsDAOImpl;
 import com.example.demo.DAO.impl.PicturesToObjectsDAOImpl;
 import com.example.demo.DAO.impl.ReactionsDAOImpl;
 import com.example.demo.DAO.impl.UsersDAOImpl;
@@ -26,9 +25,6 @@ public class PicturesController {
 
     @Autowired
     private final UsersDAOImpl UsersDAO = new UsersDAOImpl();
-
-    @Autowired
-    private final PicturesToPhenomenonsDAOImpl PicturesToPhenomenonsDAO = new PicturesToPhenomenonsDAOImpl();
 
     @Autowired
     private final PicturesToObjectsDAOImpl PicturesToObjectsDAO = new PicturesToObjectsDAOImpl();
@@ -50,7 +46,6 @@ public class PicturesController {
         }
 
         model.addAttribute("picture", picture);
-        model.addAttribute("PicturesToPhenomenonsService", PicturesToPhenomenonsDAO);
         model.addAttribute("ReactionsService", ReactionsDAO);
         model.addAttribute("PicturesToObjectsService", PicturesToObjectsDAO);
         model.addAttribute("UsersService", UsersDAO);
